@@ -1,0 +1,16 @@
+# Secrets
+.env
+
+# Environnement virtuel Python
+venv/
+
+# Cache Python
+__pycache__/
+*.pyc
+
+# Données locales (cours importés, index vectoriel)
+backend/data/
+
+# Frontend (pour plus tard)
+node_modules/
+dist/
