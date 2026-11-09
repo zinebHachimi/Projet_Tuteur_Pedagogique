@@ -59,6 +59,7 @@ def supprimer(conv_id: int, db: Session = Depends(get_db), user: User = Depends(
 
 
 @router.post("/{conv_id}/messages", response_model=ChatResponse)
+@router.post("/{conv_id}/messages", response_model=ChatResponse)
 def envoyer(
     conv_id: int,
     data: MessageIn,
@@ -78,7 +79,10 @@ def envoyer(
     db.add(user_msg)
 
     debut = time.perf_counter()
-    texte, type_demande = generate_reply(historique, question)
+    try:
+        texte, type_demande = generate_reply(historique, question)
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Le modèle n'a pas répondu : {e}")
     duree_ms = int((time.perf_counter() - debut) * 1000)
 
     user_msg.type = type_demande

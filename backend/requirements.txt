@@ -7,3 +7,7 @@ email-validator
 python-jose[cryptography]
 bcrypt
 python-multipart
+langchain-core
+langchain-google-genai
+langchain-groq
+langgraph

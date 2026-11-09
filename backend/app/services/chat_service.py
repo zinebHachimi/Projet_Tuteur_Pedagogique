@@ -1,3 +1,4 @@
+from app.services.agent import repondre
 def detect_type(question: str) -> str:
     q = question.lower()
     if "qcm" in q:
@@ -16,7 +17,5 @@ def detect_type(question: str) -> str:
 
 
 def generate_reply(historique: list, question: str):
-    """Réponse provisoire. Sera remplacée par le LLM à l'étape 4."""
-    type_demande = detect_type(question)
-    texte = f"[Réponse provisoire - type détecté : {type_demande}] Tu as demandé : {question}"
-    return texte, type_demande
+    """Retourne (texte de la réponse, type de la demande)."""
+    return repondre(historique, question)
