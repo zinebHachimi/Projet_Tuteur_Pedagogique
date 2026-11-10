@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class MessageIn(BaseModel):
@@ -25,13 +25,29 @@ class ConversationOut(BaseModel):
 
 
 class ConversationDetail(ConversationOut):
-    messages: List[MessageOut] = []
+    messages: List[MessageOut] = Field(default_factory=list)
+
+
+class SourceOut(BaseModel):
+    document_id: int
+    nom_fichier: str
+    page: Optional[int] = None
+    extrait: str
 
 
 class ChatResponse(BaseModel):
     conversation: ConversationOut
     user_message: MessageOut
     assistant_message: MessageOut
+    sources: List[SourceOut] = Field(default_factory=list)
+
+
+class DocumentOut(BaseModel):
+    id: int
+    nom_fichier: str
+    conversation_id: Optional[int] = None
+    created_at: datetime
+    model_config = {"from_attributes": True}
 
 
 class ProfileStats(BaseModel):

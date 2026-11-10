@@ -16,6 +16,6 @@ def detect_type(question: str) -> str:
     return "general"
 
 
-def generate_reply(historique: list, question: str):
+def generate_reply(historique: list, question: str, contexte_cours: str = ""):
     """Retourne (texte de la réponse, type de la demande)."""
-    return repondre(historique, question)
+    return repondre(historique, question, contexte_cours)

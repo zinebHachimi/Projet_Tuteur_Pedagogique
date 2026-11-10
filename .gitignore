@@ -3,6 +3,7 @@
 
 # Environnement virtuel Python
 venv/
+.venv/
 
 # Cache Python
 __pycache__/
@@ -11,6 +12,6 @@ __pycache__/
 # Données locales (cours importés, index vectoriel)
 backend/data/
 
-# Frontend (pour plus tard)
+# Frontend
 node_modules/
 dist/

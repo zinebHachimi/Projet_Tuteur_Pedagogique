@@ -8,6 +8,7 @@ def _construire(provider: str, temperature: float):
         return ChatGoogleGenerativeAI(
             model=settings.GEMINI_MODEL,
             google_api_key=settings.GEMINI_API_KEY,
+            api_version="v1beta",
             temperature=temperature,
         )
     if provider == "groq":
