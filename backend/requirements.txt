@@ -14,3 +14,8 @@ langgraph
 langchain-chroma
 langchain-text-splitters
 pypdf
+transformers>=4.46,<5
+torch
+sentencepiece
+sacremoses
+langdetect
