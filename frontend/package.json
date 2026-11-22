@@ -10,10 +10,11 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
-    "vite": "latest",
+    "lucide-react": "^1.75.0",
     "react": "latest",
     "react-dom": "latest",
-    "react-markdown": "latest"
-  },
-  "devDependencies": {}
+    "react-markdown": "latest",
+    "react-router-dom": "^7.18.5",
+    "vite": "latest"
+  }
 }
