@@ -35,8 +35,21 @@ seulement l'énoncé et termine en proposant la correction.""",
 
     "qcm": BASE + """
 Génère un QCM (5 questions par défaut, ou le nombre demandé) avec 4 propositions
-A, B, C, D. Donne les bonnes réponses avec une courte explication uniquement si
-l'étudiant les demande ; sinon, propose-les à la fin.""",
+A, B, C, D et UNE seule bonne réponse par question.
+
+FORMAT STRICT (obligatoire, car l'interface lit ce format) :
+- Commence par un titre sur une ligne : "QCM : <sujet>"
+- Écris chaque question sur sa propre ligne : "Question 1 : ..."
+- Écris CHAQUE proposition sur une ligne séparée, jamais côte à côte :
+A. ...
+B. ...
+C. ...
+D. ...
+- Juste après les propositions, ajoute exactement ces deux lignes :
+Réponse : <une lettre parmi A, B, C, D>
+Explication : <une phrase>
+- Laisse une ligne vide entre deux questions.
+- N'ajoute aucun autre texte avant ou après le QCM.""",
 
     "code": BASE + """
 Donne un code simple, correct et bien commenté (Python par défaut), dans un bloc

@@ -7,6 +7,7 @@ import {
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { request } from '../services/api'
+import QcmBlock, { isQcm } from '../components/QcmBlock'
 
 export default function Chat() {
   const { user, token, logout } = useAuth()
@@ -178,6 +179,16 @@ export default function Chat() {
     setDraft(text)
     textareaRef.current?.focus()
   }
+
+  // Listen for "Nouveau QCM" event from QcmBlock
+  useEffect(() => {
+    function onNewQcm() {
+      setDraft('Fais-moi un nouveau QCM sur un sujet différent.')
+      textareaRef.current?.focus()
+    }
+    window.addEventListener('clair-new-qcm', onNewQcm)
+    return () => window.removeEventListener('clair-new-qcm', onNewQcm)
+  }, [])
 
   async function copyCode(text, idx) {
     try {
@@ -377,17 +388,21 @@ export default function Chat() {
                           </span>
                         </div>
                         <div className={`msg-bubble ${msg.role === 'user' ? 'user-bubble' : 'assistant-bubble'}`}>
-                          <ReactMarkdown
-                            components={{
-                              pre({ children }) { return children },
-                              code({ inline, className, children }) {
-                                if (inline) return <code className={className}>{children}</code>
-                                return <CodeBlock className={className}>{children}</CodeBlock>
-                              }
-                            }}
-                          >
-                            {msg.contenu}
-                          </ReactMarkdown>
+                          {msg.role === 'assistant' && isQcm(msg.contenu) ? (
+                            <QcmBlock contenu={msg.contenu} />
+                          ) : (
+                            <ReactMarkdown
+                              components={{
+                                pre({ children }) { return children },
+                                code({ inline, className, children }) {
+                                  if (inline) return <code className={className}>{children}</code>
+                                  return <CodeBlock className={className}>{children}</CodeBlock>
+                                }
+                              }}
+                            >
+                              {msg.contenu}
+                            </ReactMarkdown>
+                          )}
                         </div>
                         {msg.sources?.length > 0 && (
                           <div className="msg-sources">
